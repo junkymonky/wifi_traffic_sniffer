@@ -1,0 +1,3 @@
+scapy
+pyqt5
+matplotlib
