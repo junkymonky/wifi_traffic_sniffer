@@ -1,7 +1,6 @@
 from scapy.all import sniff,DNS, DNSQR,IP
 from datetime import datetime
-from database import save_traffic
-
+from storage import add_traffic
 listeners = []
 
 def register_listener(callback):
@@ -17,7 +16,7 @@ def process_packet(packet):
         domain = packet[DNSQR].qname.decode(errors='ignore').rstrip('.')
         time = datetime.now().strftime("%H:%M:%S")
 
-        save_traffic(ip, domain, time)
+        add_traffic(ip, domain, time)
         notify(ip)
 
 def start_sniffing():
